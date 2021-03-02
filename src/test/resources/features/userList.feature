@@ -5,18 +5,14 @@ Feature: User should able to manage  wappier Users Management
 
 
   @WUM-04
-  Scenario Outline: user can create new user with valid credentials
+  Scenario: user can create new user with valid credentials
     When user click add user button
     Then user can upload avatar
-    Then user can write <name> as user's name
-    Then user can write <country> as user's country
-    Then user can select <date> user's birthdate
+    Then user can write "Adam Smith" as user's name
+    Then user can write "VA" as user's country
+    Then user can select "02 December 1987" user's birthdate
     And user able to click save button
-    Then user able to see <userName> user on userlist table
-
-    Examples:
-      | name         | country | date               | userName     |
-      | "Adam Smith" | "VA"    | "02 December 1987" | "Adam Smith" |
+    Then user able to see "Adam Smith" user on userlist table
 
 
   @WUM-03
@@ -59,13 +55,13 @@ Feature: User should able to manage  wappier Users Management
       When user hover over each row
       And user click on "Charles Hansen"
       Then user should able to see "Charles Hansen" as header on userView page
-      Then user click edit button
-      And user can write "St Charles Halsen" as user's name
-      And user able to click save button
-      Then history table contains "St Charles Halsen"
+      And user click edit button
+      And user can write "St Charles Halsen " as user's name
+      Then history table contains "St Charles Halsen "
       And user can go userList page by clicking list button
       Then user can sort the table based on "name"
-      And user can "St Charles Halsen" on history on userList page
+      And user can see "St Charles Halsen " on history on userList page
+
 
    Scenario: verify go back userListPage by clicking list button
         Given user click add user button

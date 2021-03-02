@@ -58,8 +58,8 @@ public class userManagement {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
         } catch (Exception e) {
-
-
+            System.out.println("Ignore is related with upload avatar");
+        }
 
     }
 
@@ -181,8 +181,8 @@ public class userManagement {
       userViewPage.userListButton.click();
     }
 
-    @Then("user can {string} on history on userList page")
-    public void user_can_on_history_on_userList_page(String change) {
+    @Then("user can see {string} on history on userList page")
+    public void user_can_see_on_history_on_userList_page(String change) {
         String actualHistory = userListPage.historyChange.getText();
         assertTrue(actualHistory.contains(change));
 
