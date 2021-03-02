@@ -17,6 +17,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 
 public class userManagement {
@@ -67,6 +68,7 @@ public class userManagement {
     public void user_can_write_as_user_s_name(String name) {
         userViewPage.nameInputBox.clear();
         userViewPage.nameInputBox.sendKeys(name);
+
     }
 
     @Then("user can write {string} as user's country")
@@ -92,6 +94,7 @@ public class userManagement {
 
     @Then("user able to click save button")
     public void user_able_to_click_save_button() {
+        BrowserUtils.waitForClickablility(userListPage.saveButton,3);
         userListPage.saveButton.click();
     }
 
@@ -135,15 +138,17 @@ public class userManagement {
     @When("user click on {string}")
     public void user_click_on(String name) {
         for (WebElement webElement : userListPage.getTableValue()) {
-            if(webElement.getText().equals(name)){
-                System.out.println("webElement.getText() = " + webElement.getText());
+            String actual = webElement.getText();
+            if(actual.equals(name)){
                 webElement.click();
+                break;
             }
         }
+        BrowserUtils.waitFor(2);
     }
     @Then("user should able to see {string} as header on userView page")
     public void user_should_able_to_see_as_header_on_userView_page(String name) {
-        
+        BrowserUtils.waitFor(3);
         String actualHeader = userViewPage.userHeader.getText();
         System.out.println("actualHeader = " + actualHeader);
         assertEquals(actualHeader, name);
@@ -166,7 +171,7 @@ public class userManagement {
 
     @Then("user click edit button")
     public void user_click_edit_button() {
-       userViewPage.userEditButton.click();
+       BrowserUtils.clickWithJS(userViewPage.userEditButton);
     }
 
     @Then("history table contains {string}")

@@ -5,14 +5,19 @@ Feature: User should able to manage  wappier Users Management
 
 
   @WUM-04
-  Scenario: user can create new user with valid credentials
+  Scenario Outline: user can create new user with valid credentials
     When user click add user button
     Then user can upload avatar
-    Then user can write "Adam Smith" as user's name
-    Then user can write "VA" as user's country
-    Then user can select "02 December 1987" user's birthdate
+    Then user can write <name> as user's name
+    Then user can write <country> as user's country
+    Then user can select <birthday> user's birthdate
     And user able to click save button
-    Then user able to see "Adam Smith" user on userlist table
+    Then user able to see <name> user on userlist table
+
+    Examples:
+      | name         | country | birthday           |
+      | "Adam Smith" | "VA"    | "02 December 1987" |
+      | "Tom Hanks   | "USA"   | "02 July 1973"     |
 
 
   @WUM-03
@@ -50,23 +55,34 @@ Feature: User should able to manage  wappier Users Management
     Then user should able to see "Charles Hansen" as header on userView page
 
 
-    @smoke @wip
-   Scenario:verify functionality of app
-      When user hover over each row
-      And user click on "Charles Hansen"
-      Then user should able to see "Charles Hansen" as header on userView page
-      And user click edit button
-      And user can write "St Charles Halsen " as user's name
-      Then history table contains "St Charles Halsen "
-      And user can go userList page by clicking list button
-      Then user can sort the table based on "name"
-      And user can see "St Charles Halsen " on history on userList page
+  @smoke @wip
+  Scenario:verify functionality of app
+    When user hover over each row
+    And user click on "St Charles Hansen"
+    Then user should able to see "St Charles Hansen" as header on userView page
+    And user click edit button
+    And user can write "Charles Halsen " as user's name
+    And user able to click save button
+    Then history table contains "Charles Halsen "
+    And user can go userList page by clicking list button
+    Then user can sort the table based on "name"
+    And user can see "St Charles Halsen " on history on userList page
+
+  @WUM-12
+  Scenario: verify go back userListPage by clicking list button
+    Given user click add user button
+    When user click list button
+    Then user is on userListPage
+
+  @WUM-13
+  Scenario: verify history
+    When verify that time info is identified
+    Then time is sorted
+    And user can scroll-down and scroll-up history
 
 
-   Scenario: verify go back userListPage by clicking list button
-        Given user click add user button
-        When user click list button
-        Then user is on userListPage
+
+
 
 
 

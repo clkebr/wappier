@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class UserListPage  extends BasePage{
 
-    @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-users/wua-users-list/p-table/div/div/div/div[1]/div/table/thead/tr[2]")
+    @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-users/wua-users-list/p-table/div/div/div/div[1]/div/table/thead/tr[2]/th")
     public List<WebElement> tableColumns;
 
     @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-users/wua-users-list/p-table/div/div/div/div[2]/table/tbody/tr")
@@ -74,7 +74,7 @@ public class UserListPage  extends BasePage{
         for (int i = 1; i < tableBody.size(); i++) {
             for (int j = 2; j < tableColumns.size(); j++) {
                 WebElement element = Driver.get().findElement(By.xpath("/html/body/wua-root/wua-layout/div/div/div[1]/wua-users" +
-                                                            "/wua-users-list/p-table/div/div/div/div[2]/table/tbody/tr[" + i + "]/td[" + j + "]"));
+                        "/wua-users-list/p-table/div/div/div/div[2]/table/tbody/tr[" + i + "]/td[" + j + "]"));
                 if(element.getText().isEmpty()){
                     flag=true;
                     break;
@@ -89,12 +89,13 @@ public class UserListPage  extends BasePage{
         List<WebElement> eachCell= new ArrayList<>();
         for (int i = 1; i < tableBody.size(); i++) {
             for (int j = 2; j < tableColumns.size(); j++) {
+
                 WebElement element = Driver.get().findElement(By.xpath("/html/body/wua-root/wua-layout/div/div/div[1]/wua-users" +
                         "/wua-users-list/p-table/div/div/div/div[2]/table/tbody/tr[" + i + "]/td[" + j + "]"));
                 eachCell.add(element);
             }
         }
-        System.out.println("BrowserUtils.getElementsText(eachCell) = " + BrowserUtils.getElementsText(eachCell));
+
         return eachCell;
     }
 
@@ -111,7 +112,7 @@ public class UserListPage  extends BasePage{
         return columnList;
 
     }
-    public List<String> getColumnValue(String columnName){
+    public List<String> getColumnValue(@org.jetbrains.annotations.NotNull String columnName){
 
         int index=0;
         List<String> columnList= new ArrayList<>();
@@ -125,20 +126,22 @@ public class UserListPage  extends BasePage{
             case "number of apps":
                 index=5;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + columnName.toLowerCase());
         }
         for (int i = 1; i < tableBody.size(); i++) {
-             columnList.add(Driver.get().findElement(By.xpath("/html/body/wua-root/wua-layout/div/div/div[1]/wua-users/wua-users" +
-                     "-list/p-table/div/div/div/div[2]/table/tbody/tr["+i+"]/td["+index+"]")).getText());
+            columnList.add(Driver.get().findElement(By.xpath("/html/body/wua-root/wua-layout/div/div/div[1]/wua-users/wua-users" +
+                    "-list/p-table/div/div/div/div[2]/table/tbody/tr["+i+"]/td["+index+"]")).getText());
 
         }
-       return columnList;
+        return columnList;
     }
 
     public List<WebElement> getRow(){
         List<WebElement> rowList= new ArrayList<>();
         for (int i = 1; i < tableBody.size(); i++) {
             rowList.add(Driver.get().findElement(By.xpath("/html/body/wua-root/wua-layout/div/div/div[1]/wua-users/" +
-                                        "wua-users-list/p-table/div/div/div/div[2]/table/tbody/tr["+i+"]")));
+                    "wua-users-list/p-table/div/div/div/div[2]/table/tbody/tr["+i+"]")));
         }
         return rowList;
     }
@@ -154,14 +157,14 @@ public class UserListPage  extends BasePage{
         BrowserUtils.waitForClickablility(before,3);
         String pickerYear = Driver.get().findElement(By.cssSelector(".ui-datepicker-year.ng-tns-c92-0.ng-star-inserted")).getText();
 
-       String pickerMonth= Driver.get().findElement(By.cssSelector(".ui-datepicker-month.ng-tns-c92-0.ng-star-inserted")).getText();
+        String pickerMonth= Driver.get().findElement(By.cssSelector(".ui-datepicker-month.ng-tns-c92-0.ng-star-inserted")).getText();
 
 
         do{
             before.click();
             pickerYear = Driver.get().findElement(By.cssSelector(".ui-datepicker-year.ng-tns-c92-0.ng-star-inserted")).getText();
         }while(!(pickerYear.equalsIgnoreCase(year)));
-            BrowserUtils.waitFor(4);
+        BrowserUtils.waitFor(4);
         do{
             before.click();
             pickerMonth= Driver.get().findElement(By.cssSelector(".ui-datepicker-month.ng-tns-c92-0.ng-star-inserted")).getText();
@@ -169,10 +172,10 @@ public class UserListPage  extends BasePage{
 
         for (WebElement calender : pickerDate) {
             String calDate=calender.getText();
-           if(calDate.equals(date)){
-             BrowserUtils.clickWithJS(calender);
-             break;
-           }
+            if(calDate.equals(date)){
+                BrowserUtils.clickWithJS(calender);
+                break;
+            }
         }
 
     }

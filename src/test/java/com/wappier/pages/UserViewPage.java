@@ -10,13 +10,7 @@ public class UserViewPage extends BasePage {
     @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-user-details/div/div/div[2]/div/div[2]/wua-user-apps-list/p-table/div/div/table/thead/tr")
     public Set<WebElement> appTableColumns;
 
-    @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-user-details/div/div/div[2]/div/div[2]/wua-user-apps-list/p-table/div/div/table/tbody/tr[1]/td[3]/button[1]")
-    public WebElement app1EditButton;
-
-    @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-user-details/div/div/div[2]/div/div[2]/wua-user-apps-list/p-table/div/div/table/tbody/tr[1]/td[3]/button[2]")
-    public WebElement app1DeleteButton;
-
-    @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-user-details/div/div/div[3]/wua-user-detail-actions/button[1]")
+    @FindBy(xpath = "//button[.='Edit']")
     public WebElement userEditButton;
 
     @FindBy(xpath = "/html/body/wua-root/wua-layout/div/div/div[1]/wua-user-details/div/div/div[3]/wua-user-detail-actions/button[2]")
